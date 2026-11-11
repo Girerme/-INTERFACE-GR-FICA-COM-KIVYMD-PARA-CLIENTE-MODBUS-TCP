@@ -29,7 +29,7 @@ MDScreen:
         MDButton:
             style: "filled"
             pos_hint: {"center_x": .5}
-            on_release: app.conectar() 
+            on_release: app.conectar()
             MDButtonText:
                 text: "Conectar"
         
@@ -44,7 +44,7 @@ MDScreen:
             mode: "outlined"
             MDTextFieldHintText:
                 text: "Valor para escrita"
-        
+
         MDBoxLayout:
             orientation: "horizontal"
             spacing: "20dp"
@@ -54,14 +54,31 @@ MDScreen:
             
             MDButton:
                 style: "elevated"
-                on_release: app.ler_dados() 
+                on_release: app.ler_dados()
                 MDButtonText:
                     text: "Ler Dados"
 
             MDButton:
                 style: "elevated"
-                on_release: app.escrever_dados()  
+                on_release: app.escrever_dados()
                 MDButtonText:
                     text: "Escrever Dados"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "10dp"
+            size_hint_y: None
+            height: "48dp"
+            
+            MDCheckbox:
+                id: cb_recorrente
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"center_y": .5}
+                on_active: app.toggle_recorrente(*args)
+
+            MDLabel:
+                text: "Leitura recorrente"
+                pos_hint: {"center_y": .5}
 
         Widget:
