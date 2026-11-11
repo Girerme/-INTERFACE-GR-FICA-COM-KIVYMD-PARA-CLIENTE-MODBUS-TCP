@@ -13,3 +13,27 @@ MDScreen:
             height: "50dp"
             font_style: "Headline"
             role: "small"
+        
+        MDTextField:
+            id: ip_input
+            mode: "outlined"
+            
+            MDTextFieldHintText:
+                text: "IP do Servidor (ex: 127.0.0.1)"
+
+        MDTextField:
+            id: port_input
+            mode: "outlined"
+            
+            MDTextFieldHintText:
+                text: "Porta (ex: 502)"
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5}
+            on_release: app.conectar()
+            
+            MDButtonText:
+                text: "Conectar"
+
+        Widget:
