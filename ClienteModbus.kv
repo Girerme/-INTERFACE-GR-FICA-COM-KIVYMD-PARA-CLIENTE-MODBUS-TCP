@@ -119,12 +119,16 @@ MDScreen:
                 text: "Leitura recorrente"
                 pos_hint: {"center_y": .5}
 
-        MDTextField:
-            id: log_output
-            mode: "outlined"
-            multiline: True
-            readonly: True
-            size_hint_y: 1
-            max_text_length: 200
-            MDTextFieldHintText:
-                text: "Console / Resultado"
+        MDScrollView:
+            size_hint_y: 1  
+            
+            MDTextField:
+                id: log_output
+                mode: "outlined"
+                multiline: True
+                readonly: True
+                size_hint_y: None  
+                max_text_length: 200
+                
+                MDTextFieldHintText:
+                    text: "Console / Resultado"

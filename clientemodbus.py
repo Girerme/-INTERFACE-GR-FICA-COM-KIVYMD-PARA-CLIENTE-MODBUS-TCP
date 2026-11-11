@@ -37,7 +37,7 @@ class ClienteMODBUS:
     def esta_conectado(self) -> bool:
         return self._cliente.is_open
 
-    # 1. COILS
+    # COILS
 
     def ler_coil(self, addr: int) -> tuple[bool, str]:
         res = self._cliente.read_coils(int(addr), 1)
@@ -59,7 +59,7 @@ class ClienteMODBUS:
             return True, f"Escrita OK -> Coil [{addr}] = {val_bool}"
         return False, f"Erro ao escrever Coil no endereço {addr}."
 
-    # 2. HOLDING REGISTERS
+    # HOLDING REGISTERS
 
     def ler_holding_register(self, addr: int) -> tuple[bool, str]:
         res = self._cliente.read_holding_registers(int(addr), 1)
@@ -80,7 +80,7 @@ class ClienteMODBUS:
             return True, f"Escrita OK -> Holding Register [{addr}] = {val_int}"
         return False, f"Erro ao escrever no Holding Register {addr}."
 
-    # 3. FLOAT (IEEE 754 - 32 bits em 2 registradores consecutivos)
+    # FLOAT
 
     def ler_float(self, addr: int) -> tuple[bool, str]:
         addr_int = int(addr)
@@ -105,7 +105,7 @@ class ClienteMODBUS:
             return True, f"Escrita OK -> Float [{addr_int}, {addr_int + 1}] = {val_float:.4f}"
         return False, f"Erro ao escrever Float nos endereços {addr_int} e {addr_int + 1}."
 
-    # 4. BITS DE UM REGISTRADOR (Bit individual ou 16 bits múltiplos)
+    # BITS DE UM REGISTRADOR
 
     @staticmethod
     def _separar_endereco_bit(addr_raw: str) -> tuple[int, int | None]:
@@ -150,8 +150,6 @@ class ClienteMODBUS:
 
         limpo = valor_str.strip()
 
-        # Caso 1: Bit individual (ex: endereço '1000.3' e valor '1')
-        # Também aceita endereço '1000' e valor no formato '3:1' (bit=3, valor=1)
         if bit_idx is None and ":" in limpo:
             try:
                 b_str, v_str = limpo.split(":", 1)
@@ -178,7 +176,6 @@ class ClienteMODBUS:
                 return True, f"Escrita OK -> Reg [{addr}] Bit {bit_idx} = {int(bit_bool)} (Bin: {novo_reg:016b})"
             return False, f"Erro ao escrever bit {bit_idx} no registrador {addr}."
 
-        # Caso 2: Múltiplos bits no registrador (ex: '10101111' ou '0000000011110000')
         bin_clean = limpo.replace(" ", "").replace(",", "")
         if not bin_clean or not all(c in "01" for c in bin_clean) or len(bin_clean) > 16:
             return False, (
