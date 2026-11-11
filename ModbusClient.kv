@@ -13,3 +13,118 @@ MDScreen:
             height: "50dp"
             font_style: "Headline"
             role: "small"
+            
+        MDTextField:
+            id: ip_input
+            mode: "outlined"
+            MDTextFieldHintText:
+                text: "IP do Servidor (ex: 127.0.0.1)"
+
+        MDTextField:
+            id: port_input
+            mode: "outlined"
+            MDTextFieldHintText:
+                text: "Porta (ex: 502)"
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5}
+            on_release: app.conectar()
+            MDButtonText:
+                text: "Conectar"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "48dp"
+
+            MDCheckbox:
+                id: chk_coil
+                group: "tipo_dado"  
+                active: True        
+                size_hint: None, None
+                size: "48dp", "48dp"
+            MDLabel:
+                text: "Coils"
+
+            MDCheckbox:
+                id: chk_register
+                group: "tipo_dado"
+                size_hint: None, None
+                size: "48dp", "48dp"
+            MDLabel:
+                text: "Registers"
+
+            MDCheckbox:
+                id: chk_float
+                group: "tipo_dado"
+                size_hint: None, None
+                size: "48dp", "48dp"
+            MDLabel:
+                text: "Float"
+
+            MDCheckbox:
+                id: chk_bits
+                group: "tipo_dado"
+                size_hint: None, None
+                size: "48dp", "48dp"
+            MDLabel:
+                text: "Bits"
+        
+        MDTextField:
+            id: address_input
+            mode: "outlined"
+            MDTextFieldHintText:
+                text: "Endereço Modbus (ex: 0)"
+
+        MDTextField:
+            id: value_input
+            mode: "outlined"
+            MDTextFieldHintText:
+                text: "Valor para escrita"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "20dp"
+            size_hint_y: None
+            height: "50dp"
+            pos_hint: {"center_x": .5}
+            
+            MDButton:
+                style: "elevated"
+                on_release: app.ler_dados()
+                MDButtonText:
+                    text: "Ler Dados"
+
+            MDButton:
+                style: "elevated"
+                on_release: app.escrever_dados()
+                MDButtonText:
+                    text: "Escrever Dados"
+        
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "10dp"
+            size_hint_y: None
+            height: "48dp"
+            
+            MDCheckbox:
+                id: cb_recorrente
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"center_y": .5}
+                on_active: app.toggle_recorrente(*args)
+
+            MDLabel:
+                text: "Leitura recorrente"
+                pos_hint: {"center_y": .5}
+
+        MDTextField:
+            id: log_output
+            mode: "outlined"
+            multiline: True
+            readonly: True
+            size_hint_y: 1
+            
+            MDTextFieldHintText:
+                text: "Console / Resultado"
